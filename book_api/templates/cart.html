@@ -107,13 +107,14 @@
     {% if total_price %}
     <h5 style="  padding-left: 45px;">You have to pay</h5>
     <h5 style="  padding-left: 45px;">Price: ₹{{ total_price }}</h5>
-    <form class="border border-light p-5" action="{% url 'payment_success' %}" method="POST"></form>
-    {% csrf_token %}
-    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_V9lMRSNuZ8bCJX"
-      data-amount="{{ payment.amount }}" data-currency="INR" data-order_id="{{ payment.id }}"
-      data-buttontext="Pay with Razorpay" data-name="Professional Cipher" data-description="Django and Data Science"
-      data-image="https://example.com/your_logo.jpg" data-prefill.name="{{ request.user.username }}"
-      data-prefill.email="{{ request.user.email }}" data-theme="blue"></script>
+    <form class=" border border-light p-5" action="{% url 'payment_success' %}" method="POST">
+        {% csrf_token %}
+      
+        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_V9lMRSNuZ8bCJX"
+            data-amount="{{payment.fees}}" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Pay with Razorpay"
+            data-name="Professional Cipher" data-description="Django and Data Science"
+            data-image="https://example.com/your_logo.jpg" data-prefill.name="PC" data-prefill.email="pc@studygyaan.com"
+            data-them = "blue"></script>
     </form>
   </div>
   {% endif %}
